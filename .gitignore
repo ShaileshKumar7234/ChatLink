@@ -1,0 +1,16 @@
+# Dependencies
+/node_modules
+
+# Configuration and Secrets
+.env
+.vscode/
+
+# Build and Logs
+npm-debug.log*
+
+# Uploaded Files
+public/images/*
+
+# Operating System Files
+.DS_Store
+Thumbs.db
