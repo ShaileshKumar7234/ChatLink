@@ -7,7 +7,7 @@ export const Register = async (req, res) => {
     if (!name || !email || !password || !req.file) {
       return res.status(400).json({
         success: false,
-        message: `${!name ? 'Name' : !email ? 'Email' : !password ? 'Password' : ""} is required`,})
+        message: `${!name ? 'Name' : !email ? 'Email' : !password ? 'Password' : "Profile"} is required`,})
 
       }
     const existUser = await UserModel.findOne({ email });
@@ -68,3 +68,28 @@ export const Login = async (req, res) => {
       .json({ success: false, message: "Internal Server Error" });
   }
 };
+
+
+export const GetUser = async (req, res) => {
+  try {
+    const user=await UserModel.find();
+    if(!user){
+      return res.status(404).json({
+        success:false,
+        message:"User not found"
+      });
+    }
+    return res.status(200).json({
+      success:true,
+      message:"User found successfully",
+      data:user,
+    });
+  }
+  catch (error) {
+    console.log("error", error);
+    res.status(500).json({
+      success:false,
+      message:"Internal server error"
+    });
+  }
+}
